@@ -149,7 +149,7 @@ def complete_workout(request):
     # 2. Add entry to Daily Log
     today_log, created = DailyLog.objects.get_or_create(user=request.user, date=timezone.now().date())
     timestamp = timezone.now().strftime("%H:%M")
-    log_entry = f"[{timestamp}] { _('Studio session completed') } (+{energy_gain})"
+    log_entry = f"[{timestamp}] { _('Session Studio terminée') } (+{energy_gain})"
     
     if today_log.notes:
         today_log.notes += f"\n{log_entry}"
