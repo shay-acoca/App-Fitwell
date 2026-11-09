@@ -1,5 +1,51 @@
 # FitWell - Fitness and Wellness Platform
 
+> Full-stack fitness and wellness platform built with Django. Junior developer portfolio project by [Shay Acoca](https://github.com/shay-acoca), trained at HackerU.
+
+**Live demo:** https://app-fitwell.onrender.com (free hosting, the first request can take up to a minute)
+
+## Overview
+
+**Problem:** workouts, nutrition and motivation usually live in separate apps. FitWell brings them together in one account.
+
+**Audience:** people who want a simple, structured routine, in English or French.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    B[Browser] -->|Django templates, session auth| W[web app]
+    C[API client] -->|REST, JWT| A[api app]
+    W --> S[Services: planner, scoring, gamification]
+    A --> S
+    S --> DB[(PostgreSQL in production, SQLite locally)]
+```
+
+| Layer | Implementation |
+|---|---|
+| Web interface | Server-rendered Django templates in `backend/web` |
+| REST API | Django REST Framework viewsets in `backend/api/views` |
+| Business logic | `backend/api/services` |
+| Authentication | Django sessions for the web, SimpleJWT for the API, login by email or username |
+| Data | Models in `backend/api/models`: users, workouts, programs, plans, nutrition, shop, gamification, content |
+| Deployment | Render, Gunicorn, WhiteNoise |
+
+## Testing
+
+```bash
+cd backend
+python manage.py test
+```
+
+52 automated tests cover the API and the main web flows. They also run on every push through GitHub Actions.
+
+## Known limitations
+
+- The planner uses formulas and rules (BMR, TDEE, macros). It does not use a machine-learning model.
+- The shop uses a demo checkout: no real payment is processed.
+- Tailwind CSS is loaded from a CDN instead of a production build.
+- Free hosting adds a cold start on the first visit.
+
 FitWell is a complete web application for fitness and wellness. It allows users to track their workouts, plan their nutrition, and progress with a gamification system.
 
 ## Table of Contents
@@ -16,7 +62,7 @@ FitWell is a complete web application for fitness and wellness. It allows users 
 ### Onboarding
 New users go through a 4-step integration process that automatically generates their first personalized plan. They select their goal (weight loss, muscle gain, maintenance), their activity level, and their biometric data.
 
-### AI Planner
+### Personalized Planner (rule-based)
 The planner generates workout and nutrition programs based on user data. It calculates BMR (basal metabolic rate), TDEE (total daily energy expenditure), and macros (proteins, carbs, fats) using the Mifflin-St Jeor formula.
 
 ### Workout Tracking
@@ -44,7 +90,7 @@ The dashboard displays the daily log (water, sleep, mood, weight), weekly statis
 ### Training Programs
 3 pre-configured programs (weight loss, muscle gain, mobility and yoga) with detailed structure.
 
-### Shop
+### Shop (demo checkout, no real payment)
 13 products (bodybuilding, cardio, yoga, clothing, nutrition, accessories) with category filters.
 
 ### Cart and Orders
