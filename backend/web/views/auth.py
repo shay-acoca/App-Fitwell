@@ -1,3 +1,4 @@
+from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -30,6 +31,7 @@ def login_view(request):
         form = CustomAuthenticationForm()
     return render(request, 'web/login.html', {'form': form})
 
+@require_POST
 def logout_view(request):
     """
     User logout.

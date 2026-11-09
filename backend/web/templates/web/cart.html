@@ -52,9 +52,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{% url 'remove_from_cart' item_id=item.id %}" class="text-red-500 hover:text-red-600 text-sm font-black uppercase tracking-widest">
+                            <form method="post" action="{% url 'remove_from_cart' item_id=item.id %}" class="contents">{% csrf_token %}<button type="submit" class="text-red-500 hover:text-red-600 text-sm font-black uppercase tracking-widest">
                                 {% trans "Supprimer" %}
-                            </a>
+                            </button></form>
                         </div>
                         {% endfor %}
                     </div>

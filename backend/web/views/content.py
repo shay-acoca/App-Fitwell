@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 from web.forms import CommentForm
 from api.models import Article, Category, Comment, Exercise, Recipe
+from web.decorators import post_login_required
 
 def exercise_library(request):
     """
@@ -201,7 +202,7 @@ def delete_comment(request, comment_id):
         messages.error(request, _("You are not authorized to remove this comment."))
         return redirect('article_detail', slug=comment.article.slug)
 
-@login_required(login_url='login')
+@post_login_required
 def like_article(request, slug):
     # Like action also counts for streak
     if hasattr(request.user, 'stats'):

@@ -21,7 +21,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Product Image -->
-            <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-slate-50/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
                 <div class="aspect-square bg-slate-900 relative">
                     {% if product.image %}
                     <img src="{{ product.image }}" alt="{{ product.name }}" loading="eager" decoding="async" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Product Details -->
-            <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+            <div class="bg-slate-50/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
                 <div class="flex items-center gap-3 mb-4">
                     <span class="px-4 py-2 bg-emerald-500/20 text-emerald-400 text-xs font-black uppercase tracking-widest rounded-2xl border border-emerald-500/30">
                         {{ product.get_category_display }}
@@ -103,9 +103,9 @@
                 <div class="space-y-4">
                     {% if product.is_in_stock %}
                         {% if user.is_authenticated %}
-                        <a href="{% url 'add_to_cart' product_id=product.id %}" class="block text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 px-8 rounded-2xl text-sm font-black uppercase tracking-widest hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg">
+                        <form method="post" action="{% url 'add_to_cart' product_id=product.id %}" class="contents">{% csrf_token %}<button type="submit" class="w-full block text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 px-8 rounded-2xl text-sm font-black uppercase tracking-widest hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg">
                             {% trans "Ajouter au panier" %}
-                        </a>
+                        </button></form>
                         {% else %}
                         <a href="{% url 'login' %}" class="block text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 px-8 rounded-2xl text-sm font-black uppercase tracking-widest hover:from-emerald-400 hover:to-emerald-500 transition-all shadow-lg">
                             {% trans "Connecte-toi pour acheter" %}
@@ -118,9 +118,9 @@
                     {% endif %}
                     
                     {% if user.is_authenticated %}
-                    <a href="{% url 'add_favorite' content_type='product' content_id=product.id %}" class="block text-center border-2 border-emerald-500/50 text-emerald-400 py-3 px-8 rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-emerald-500/10 transition-all">
+                    <form method="post" action="{% url 'add_favorite' content_type='product' content_id=product.id %}" class="contents">{% csrf_token %}<button type="submit" class="w-full block text-center border-2 border-emerald-500/50 text-emerald-400 py-3 px-8 rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-emerald-500/10 transition-all">
                         {% trans "Ajouter aux favoris" %}
-                    </a>
+                    </button></form>
                     {% endif %}
                 </div>
             </div>
@@ -134,7 +134,7 @@
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {% for related in related_products %}
-                <a href="{% url 'shop_detail' slug=related.slug %}" class="group h-full flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-xl hover:-translate-y-1 hover:border-emerald-400/40 transition-all duration-300">
+                <a href="{% url 'shop_detail' slug=related.slug %}" class="group h-full flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-50/5 backdrop-blur-xl shadow-xl hover:-translate-y-1 hover:border-emerald-400/40 transition-all duration-300">
                     <div class="relative h-56 w-full overflow-hidden bg-slate-900">
                         {% if related.image %}
                         <img src="{{ related.image }}" alt="{{ related.name }}" loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">

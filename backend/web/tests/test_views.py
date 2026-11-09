@@ -57,7 +57,7 @@ class WebTests(TestCase):
         """
         self.client.force_login(self.user)
         url = reverse('like_article', args=[self.article.slug])
-        response = self.client.get(url)
+        response = self.client.post(url)
         
         self.assertEqual(response.status_code, 302)
         self.assertTrue(self.article.likes.filter(id=self.user.id).exists())
@@ -425,3 +425,35 @@ class RegressionPageTests(TestCase):
 
     def test_invalid_shop_price_filter_is_ignored(self):
         self.assertEqual(self.client.get(reverse('shop_list'), {'min_price': 'abc'}).status_code, 200)
+
+
+class PostOnlyActionTests(TestCase):
+    """Buttons that change data must refuse GET and bring visitors back after login."""
+
+    def setUp(self):
+        self.user = User.objects.create_user('poster', 'poster@example.com', 'Str0ng!Pass123')
+        self.user.is_onboarded = True
+        self.user.save()
+        self.category = Category.objects.create(name='Tips', slug='tips')
+        self.article = Article.objects.create(title='Post only', slug='post-only', content='x', author=self.user, category=self.category)
+        self.url = reverse('like_article', args=[self.article.slug])
+
+    def test_get_is_refused(self):
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get(self.url).status_code, 405)
+
+    def test_anonymous_returns_to_previous_page(self):
+        origin = 'http://testserver' + reverse('article_detail', args=[self.article.slug])
+        response = self.client.post(self.url, HTTP_REFERER=origin)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('next=', response['Location'])
+        self.assertNotIn('like', response['Location'])
+
+    def test_external_referer_is_ignored(self):
+        response = self.client.post(self.url, HTTP_REFERER='https://evil.example/')
+        self.assertNotIn('evil.example', response['Location'])
+
+    def test_logout_requires_post(self):
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get(reverse('logout')).status_code, 405)
+        self.assertEqual(self.client.post(reverse('logout')).status_code, 302)

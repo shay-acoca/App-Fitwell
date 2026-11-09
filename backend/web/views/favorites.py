@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from api.models import Favorite, Exercise, Recipe, Product
+from web.decorators import post_login_required
 
 
 @login_required
@@ -25,7 +26,7 @@ def favorites_view(request):
     return render(request, 'web/favorites.html', context)
 
 
-@login_required
+@post_login_required
 def add_favorite(request, content_type, content_id):
     """
     Add content to favorites.
@@ -63,7 +64,7 @@ def add_favorite(request, content_type, content_id):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-@login_required
+@post_login_required
 def remove_favorite(request, favorite_id):
     """
     Remove a favorite.

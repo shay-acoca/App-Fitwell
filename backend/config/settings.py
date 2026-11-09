@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from decouple import config
+from decouple import Csv, config
 from datetime import timedelta
 import dj_database_url
 
@@ -22,7 +22,7 @@ DEBUG = False if _FORCE_PRODUCTION else config('DEBUG', default=True, cast=bool)
 # -----------------------------------------------------------------------------
 
 # 1. ALLOWED_HOSTS
-ALLOWED_HOSTS = ['*']  # Accept all domains
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
 
 # Automatic support for Render
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')

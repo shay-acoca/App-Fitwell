@@ -93,9 +93,9 @@
                             {% trans "Voir" %}
                         </a>
                         {% endif %}
-                        <a href="{% url 'remove_favorite' favorite_id=favorite.id %}" class="text-red-500 hover:text-red-600 text-xs font-black uppercase tracking-widest py-3 px-4">
+                        <form method="post" action="{% url 'remove_favorite' favorite_id=favorite.id %}" class="contents">{% csrf_token %}<button type="submit" class="text-red-500 hover:text-red-600 text-xs font-black uppercase tracking-widest py-3 px-4">
                             {% trans "Supprimer" %}
-                        </a>
+                        </button></form>
                     </div>
                 </div>
             </div>

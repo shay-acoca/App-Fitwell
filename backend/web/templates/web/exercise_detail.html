@@ -69,9 +69,9 @@
 
                     {% if user.is_authenticated %}
                     <div class="flex gap-4">
-                        <a href="{% url 'add_favorite' content_type='exercise' content_id=exercise.id %}" class="flex-1 text-center border-2 border-tse_accent text-tse_accent py-3 px-6 rounded-tse-pill text-sm font-black uppercase tracking-widest hover:bg-tse_accent hover:text-white transition-colors">
+                        <form method="post" action="{% url 'add_favorite' content_type='exercise' content_id=exercise.id %}" class="contents">{% csrf_token %}<button type="submit" class="flex-1 text-center border-2 border-tse_accent text-tse_accent py-3 px-6 rounded-tse-pill text-sm font-black uppercase tracking-widest hover:bg-tse_accent hover:text-white transition-colors">
                             {% trans "Ajouter aux favoris" %}
-                        </a>
+                        </button></form>
                     </div>
                     {% endif %}
                 </div>
@@ -125,9 +125,9 @@
                             {% trans "Ajouter à une séance" %}
                         </a>
                         {% if user.is_authenticated %}
-                        <a href="{% url 'add_favorite' content_type='exercise' content_id=exercise.id %}" class="block text-center border-2 border-tse_accent text-tse_accent py-3 px-4 rounded-tse-pill text-sm font-black uppercase tracking-widest hover:bg-tse_accent hover:text-white transition-colors">
+                        <form method="post" action="{% url 'add_favorite' content_type='exercise' content_id=exercise.id %}" class="contents">{% csrf_token %}<button type="submit" class="w-full block text-center border-2 border-tse_accent text-tse_accent py-3 px-4 rounded-tse-pill text-sm font-black uppercase tracking-widest hover:bg-tse_accent hover:text-white transition-colors">
                             {% trans "Favori" %}
-                        </a>
+                        </button></form>
                         {% endif %}
                     </div>
                 </div>

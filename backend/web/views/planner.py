@@ -9,6 +9,7 @@ from web.forms import WellnessPlanForm, CustomEventForm
 from api.models import WellnessPlan, CustomEvent
 from api.services import generate_wellness_plan
 from api.services.gamification import check_and_award_badges
+from web.decorators import post_login_required
 
 @login_required(login_url='login')
 def planner_view(request):
@@ -107,7 +108,7 @@ def custom_planner_view(request):
         'days': days
     })
 
-@login_required(login_url='login')
+@post_login_required
 def delete_custom_event(request, event_id):
     event = get_object_or_404(CustomEvent, id=event_id, user=request.user)
     event.delete()

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from api.models import Product, Cart, CartItem, Order, OrderItem
+from web.decorators import post_login_required
 
 
 def shop_list(request):
@@ -82,7 +83,7 @@ def cart_view(request):
     return render(request, 'web/cart.html', context)
 
 
-@login_required
+@post_login_required
 def add_to_cart(request, product_id):
     """
     Add a product to the cart.
@@ -104,7 +105,7 @@ def add_to_cart(request, product_id):
     return redirect('cart')
 
 
-@login_required
+@post_login_required
 def remove_from_cart(request, item_id):
     """
     Remove an item from the cart.
