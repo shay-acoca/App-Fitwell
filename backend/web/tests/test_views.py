@@ -381,3 +381,47 @@ class WebTests(TestCase):
         self.assertTemplateUsed(response, 'web/exercise_detail.html')
         self.assertContains(response, 'Test Exercise')
 
+
+
+class RegressionPageTests(TestCase):
+    """Pages that previously failed with a server error."""
+
+    def setUp(self):
+        self.user = User.objects.create_user('regression', 'regression@example.com', 'Str0ng!Pass123')
+        self.user.is_onboarded = True
+        self.user.save()
+        self.article = Article.objects.create(title='Regression article', slug='regression-article', content='Body', author=self.user)
+        self.program = Program.objects.create(name='Test Program', slug='test-program', goal='weight_loss', level='beginner', duration='4_weeks', description_short='Test description', description_long='Test long description', total_sessions=12, duration_weeks=4, nutrition_tips='Test tips', equipment_needed='None', image='https://example.com/image.jpg')
+
+    def test_article_detail_renders(self):
+        self.assertEqual(self.client.get(reverse('article_detail', kwargs={'slug': self.article.slug})).status_code, 200)
+
+    def test_program_detail_renders(self):
+        self.assertEqual(self.client.get(reverse('program_detail', kwargs={'slug': self.program.slug})).status_code, 200)
+
+    def test_program_can_be_started(self):
+        from api.models import UserProgramProgress
+        self.client.force_login(self.user)
+        self.client.post(reverse('start_program', kwargs={'program_id': self.program.id}))
+        self.assertEqual(UserProgramProgress.objects.get(user=self.user, program=self.program).status, 'in_progress')
+
+    def test_onboarding_rejects_invalid_numbers(self):
+        self.user.is_onboarded = False
+        self.user.save()
+        self.client.force_login(self.user)
+        response = self.client.post(reverse('onboarding_step3'), {'age': '', 'gender': 'male', 'height': '', 'weight': ''})
+        self.assertEqual(response.status_code, 200)
+
+    def test_checkout_creates_order_and_shows_confirmation(self):
+        from api.models import Product, Cart, CartItem, Order
+        self.client.force_login(self.user)
+        product = Product.objects.create(name='Test Product', slug='regression-product', category='strength', description_short='Test description', description_long='Test long description', price=99.99, rating=4.5, stock=10)
+        cart = Cart.objects.create(user=self.user)
+        CartItem.objects.create(cart=cart, product=product, quantity=1)
+        response = self.client.post(reverse('fake_checkout'), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(Order.objects.filter(user=self.user).exists())
+        self.assertEqual(cart.items.count(), 0)
+
+    def test_invalid_shop_price_filter_is_ignored(self):
+        self.assertEqual(self.client.get(reverse('shop_list'), {'min_price': 'abc'}).status_code, 200)
