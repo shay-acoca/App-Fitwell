@@ -82,7 +82,7 @@ Six interactive charts show user progression: weight evolution, volume by muscle
 The dashboard displays the daily log (water, sleep, mood, weight), weekly statistics, daily agenda, and progression charts.
 
 ### Nutrition
-39 recipes with detailed macros are available. Users can filter by category and level. A BMI and macros calculator is included.
+10 recipes with detailed macros are available. Users can filter by category and level. A BMI and macros calculator is included.
 
 ### Blog
 5 quality articles with comment system, likes, and categories.
@@ -91,7 +91,7 @@ The dashboard displays the daily log (water, sleep, mood, weight), weekly statis
 3 pre-configured programs (weight loss, muscle gain, mobility and yoga) with detailed structure.
 
 ### Shop (demo checkout, no real payment)
-13 products (bodybuilding, cardio, yoga, clothing, nutrition, accessories) with category filters.
+8 products (bodybuilding, cardio, yoga, clothing, nutrition, accessories) with category filters.
 
 ### Cart and Orders
 Functional cart system with quantity management and order process.
@@ -130,13 +130,15 @@ cd backend
 python3 manage.py migrate
 
 python3 manage.py seed_db          # Admin and categories
-python3 manage.py seed_exercises   # 101 exercises
+python3 manage.py seed_exercises   # 20 exercises
 python3 manage.py seed_blog        # 5 articles
+python3 manage.py seed_blog_extra  # 3 more articles
 python3 manage.py seed_badges      # 20 badges
-python3 manage.py seed_recipes     # 39 recipes
+python3 manage.py seed_recipes     # 10 recipes
 python3 manage.py seed_programs    # 3 programs
-python3 manage.py seed_shop        # 13 products
+python3 manage.py seed_shop        # 8 products
 python3 manage.py seed_demo_user   # Demo user
+python3 manage.py sync_content     # Images, exercise instructions, recipe steps
 
 python3 manage.py compilemessages
 ```
@@ -216,13 +218,13 @@ fitwell/
 
 ## Database Seeded
 
-- 101 exercises (all muscle groups)
-- 39 recipes (with detailed macros)
+- 20 exercises (all muscle groups)
+- 10 recipes (with detailed macros)
 - 20 badges (reward system)
-- 5 articles (blog content)
+- 8 articles (blog content)
 - 3 programs (weight loss, muscle gain, mobility and yoga)
-- 13 products (fitness shop)
-- 9 users (including admin and demo)
+- 8 products (fitness shop)
+- Admin and demo users
 
 ## API
 
