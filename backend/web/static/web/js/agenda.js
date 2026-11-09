@@ -1,7 +1,7 @@
 function completeEvent(eventId) {
     const csrfToken = window.agendaConfig ? window.agendaConfig.csrfToken : '';
     
-    fetch(`/agenda/complete/${eventId}/`, {
+    fetch(`/${document.documentElement.lang}/agenda/complete/${eventId}/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken,

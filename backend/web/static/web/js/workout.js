@@ -148,7 +148,7 @@ function finishSession() {
 
     // Call Backend to record completion
     const csrfToken = window.workoutConfig ? window.workoutConfig.csrfToken : '';
-    fetch('/workout/complete/', {
+    fetch(`/${document.documentElement.lang}/workout/complete/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken,
@@ -162,7 +162,7 @@ function finishSession() {
     .catch(error => console.error('Error recording workout:', error));
     
     // Show Report Modal
-    const modal = document.getElementById('mission-report');
+    const modal = document.getElementById('session-report');
     const card = document.getElementById('report-card');
     if (modal && card) {
         modal.classList.remove('hidden');
