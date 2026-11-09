@@ -11,8 +11,10 @@ python manage.py migrate
 python manage.py seed_db || true
 python manage.py seed_exercises || true
 python manage.py seed_blog || true
+python manage.py seed_blog_extra || true
 python manage.py seed_badges || true
 python manage.py seed_recipes || true
 python manage.py seed_programs || true
 python manage.py seed_shop || true
 python manage.py seed_demo_user || true
+python manage.py sync_content || true
