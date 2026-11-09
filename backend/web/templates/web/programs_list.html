@@ -72,7 +72,7 @@
                     <p class="text-xs opacity-90">{% trans "Progression" %}</p>
                 </div>
             </div>
-            <div class="mt-4 bg-white/20 rounded-full h-2">
+            <div class="mt-4 bg-slate-50/20 rounded-full h-2">
                 <div class="bg-white rounded-full h-2 transition-all" style="width: {{ user_progress.progress_percentage }}%"></div>
             </div>
             <a href="{% url 'program_detail' slug=user_progress.program.slug %}" class="inline-block mt-4 bg-white text-tse_accent px-6 py-2 rounded-tse-pill text-xs font-black uppercase tracking-widest hover:bg-gray-100 transition-colors">

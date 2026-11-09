@@ -112,11 +112,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 const chartColors = {
-    primary: '#111111',
+    primary: '#facc15',
     secondary: '#facc15',
     energy: '#facc15',
-    health: '#111111',
-    muted: '#666666'
+    health: '#facc15',
+    muted: '#a8b0bd'
 };
 
 const commonOptions = {
@@ -124,8 +124,8 @@ const commonOptions = {
     maintainAspectRatio: true,
     plugins: { legend: { display: false } },
     scales: {
-        y: { grid: { color: '#f3f4f6' }, ticks: { color: '#666666', font: { weight: 'bold' } } },
-        x: { grid: { display: false }, ticks: { color: '#666666', font: { weight: 'bold' } } }
+        y: { grid: { color: '#262d38' }, ticks: { color: '#a8b0bd', font: { weight: 'bold' } } },
+        x: { grid: { display: false }, ticks: { color: '#a8b0bd', font: { weight: 'bold' } } }
     }
 };
 
@@ -141,7 +141,7 @@ if (document.getElementById('weightChart')) {
             datasets: [{
                 data: getJsonData('weight-values-data'),
                 borderColor: chartColors.primary,
-                backgroundColor: 'rgba(17, 17, 17, 0.05)',
+                backgroundColor: 'rgba(250, 204, 21, 0.05)',
                 borderWidth: 4,
                 fill: true,
                 tension: 0.4,

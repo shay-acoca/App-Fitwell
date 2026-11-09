@@ -3,13 +3,13 @@
    ============================================================================ */
 
 :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9f9f9;
-    --text-primary: #111111;
-    --text-muted: #666666;
+    --bg-primary: #0b0e13;
+    --bg-secondary: #171c24;
+    --text-primary: #f4f5f7;
+    --text-muted: #a8b0bd;
     --accent: #facc15; /* Yellow pastel */
     --accent-hover: #eab308;
-    --border: #eeeeee;
+    --border: #262d38;
     --radius-pill: 9999px;
     --radius-card: 24px;
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -31,7 +31,7 @@ body {
 
 .btn-tse {
     background-color: var(--accent);
-    color: var(--text-primary);
+    color: #111111;
     padding: 1rem 2.5rem;
     border-radius: var(--radius-pill);
     font-weight: 900;
@@ -48,14 +48,14 @@ body {
 }
 
 .btn-tse:hover {
-    background-color: var(--text-primary);
-    color: white;
+    background-color: #ffffff;
+    color: #111111;
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .card-tse {
-    background: white;
+    background: #11151c;
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
@@ -96,7 +96,7 @@ body {
     width: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #1e242e;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background: var(--accent);
@@ -111,7 +111,7 @@ input[type="number"],
 select, 
 textarea {
     width: 100%;
-    background-color: #f9f9f9;
+    background-color: #171c24;
     border: 1px solid #eeeeee;
     padding: 1rem 1.25rem;
     border-radius: 1rem;
@@ -122,7 +122,7 @@ textarea {
 
 input:focus, select:focus, textarea:focus {
     outline: none;
-    background-color: white;
+    background-color: #11151c;
     border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.1);
 }
@@ -130,7 +130,7 @@ input:focus, select:focus, textarea:focus {
 /* Checkbox TSE */
 input[type="checkbox"] {
     appearance: none;
-    background-color: #f3f4f6;
+    background-color: #1e242e;
     margin: 0;
     width: 1.5rem;
     height: 1.5rem;
@@ -164,3 +164,15 @@ input[type="checkbox"]:checked::before {
 /* Utils */
 .tracking-tighter { letter-spacing: -0.05em; }
 .italic { font-style: italic; }
+
+/* Dark theme helpers */
+input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea {
+    background-color: #171c24 !important;
+    color: #f4f5f7 !important;
+    border-color: #343c49 !important;
+}
+input::placeholder, textarea::placeholder { color: #8791a0 !important; }
+select option { background: #171c24; color: #f4f5f7; }
+
+/* Text on the yellow accent must stay dark */
+.bg-tse_accent, .bg-tse_accent *, .hover\:bg-tse_accent:hover, .hover\:bg-tse_accent:hover * { color: #111111 !important; }

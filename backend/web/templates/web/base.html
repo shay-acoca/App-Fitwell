@@ -2,7 +2,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" style="color-scheme: dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +15,33 @@
             theme: {
                 extend: {
                     colors: {
-                        tse_bg: '#ffffff',
+                        tse_bg: '#0b0e13',
                         tse_accent: '#facc15',
-                        tse_text: '#111111',
-                        tse_muted: '#666666',
+                        tse_text: '#f4f5f7',
+                        tse_muted: '#a8b0bd',
+                    },
+                    backgroundColor: {
+                        white: '#11151c',
+                        tse_text: '#2a313d',
+                        gray: { 50: '#171c24', 100: '#1e242e', 200: '#2a313d', 300: '#343c49' },
+                        red: { 50: '#3a1518', 100: '#4a1b1f' },
+                        green: { 50: '#12301f', 100: '#173b27' },
+                        emerald: { 50: '#12301f' },
+                        blue: { 50: '#14263f', 100: '#1a2f4d' },
+                        yellow: { 50: '#332a08' },
+                        orange: { 50: '#33200d', 100: '#3f2810' },
+                        purple: { 50: '#261a3d', 100: '#2f2149' },
+                    },
+                    borderColor: {
+                        gray: { 50: '#1e242e', 100: '#262d38', 200: '#343c49', 300: '#434c5b' },
+                    },
+                    textColor: {
+                        gray: { 500: '#a8b0bd', 600: '#a8b0bd', 700: '#c7cdd6', 800: '#dde1e7', 900: '#f4f5f7' },
+                        red: { 600: '#f87171', 700: '#fca5a5', 800: '#fecaca' },
+                        green: { 600: '#4ade80', 700: '#86efac', 800: '#bbf7d0' },
+                        blue: { 600: '#60a5fa', 700: '#93c5fd' },
+                        purple: { 600: '#c084fc', 700: '#d8b4fe', 800: '#e9d5ff' },
+                        orange: { 600: '#fb923c', 700: '#fdba74', 800: '#fed7aa' },
                     },
                     borderRadius: {
                         'tse-card': '24px',
@@ -31,7 +54,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'web/css/main.css' %}">
 </head>
-<body class="flex flex-col min-h-screen bg-white text-tse_text font-sans antialiased">
+<body class="flex flex-col min-h-screen bg-tse_bg text-tse_text font-sans antialiased">
     <!-- Navbar Minimaliste TSE -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -45,41 +68,41 @@
                     </a>
                     
                     <!-- Nav Centrale (Desktop) -->
-                    <div class="hidden xl:flex items-center gap-4 2xl:gap-8">
+                    <div class="hidden xl:flex items-center gap-3 2xl:gap-8">
                         {# Pages publiques : accessibles à tous #}
-                        <a href="{% url 'program_list' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Programmes" %}</a>
-                        <a href="{% url 'exercise_library' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Studio" %}</a>
-                        <a href="{% url 'recipe_list' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Nutrition" %}</a>
-                        <a href="{% url 'shop_list' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Boutique" %}</a>
-                        <a href="{% url 'blog_list' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Lifestyle" %}</a>
+                        <a href="{% url 'program_list' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Programmes" %}</a>
+                        <a href="{% url 'exercise_library' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Studio" %}</a>
+                        <a href="{% url 'recipe_list' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Nutrition" %}</a>
+                        <a href="{% url 'shop_list' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Boutique" %}</a>
+                        <a href="{% url 'blog_list' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Lifestyle" %}</a>
                         {# Pages privées : uniquement pour les utilisateurs connectés #}
                         {% if user.is_authenticated %}
-                            <a href="{% url 'planner' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Planning" %}</a>
-                            <a href="{% url 'leaderboard' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Communauté" %}</a>
-                            <a href="{% url 'tools' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Outils" %}</a>
+                            <a href="{% url 'planner' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Planning" %}</a>
+                            <a href="{% url 'leaderboard' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Communauté" %}</a>
+                            <a href="{% url 'tools' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap hover:text-tse_accent transition-colors">{% trans "Outils" %}</a>
                         {% endif %}
                     </div>
                 </div>
 
                 <!-- Auth / Lang (Desktop) -->
-                <div class="hidden xl:flex items-center gap-3 2xl:gap-6">
+                <div class="hidden xl:flex items-center gap-3 2xl:gap-6 flex-shrink-0">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'cart' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Panier" %}</a>
-                        <a href="{% url 'favorites' %}" class="text-xs font-black uppercase tracking-widest hover:text-tse_accent transition-colors">{% trans "Favoris" %}</a>
+                        <a href="{% url 'cart' %}" class="hover:text-tse_accent transition-colors" title="{% trans "Panier" %}" aria-label="{% trans "Panier" %}"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13L5.4 5M7 13l-2 5h13M9 21a1 1 0 100-2 1 1 0 000 2zm9 0a1 1 0 100-2 1 1 0 000 2z"/></svg></a>
+                        <a href="{% url 'favorites' %}" class="hover:text-tse_accent transition-colors" title="{% trans "Favoris" %}" aria-label="{% trans "Favoris" %}"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-4.6-9.3-9A5.4 5.4 0 0112 6a5.4 5.4 0 019.3 6c-2.3 4.4-9.3 9-9.3 9z"/></svg></a>
                     {% endif %}
                     <!-- Language Switcher -->
-                    <div class="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest border border-gray-200 rounded-tse-pill overflow-hidden">
+                    <div class="flex items-center gap-1 flex-shrink-0 text-[10px] font-black uppercase tracking-widest border border-gray-200 rounded-tse-pill overflow-hidden">
                         <a href="{% change_lang 'en' %}" class="px-3 py-1 transition-colors {% if LANGUAGE_CODE == 'en' %}bg-tse_text text-white{% else %}text-tse_muted hover:text-tse_text{% endif %}">EN</a>
                         <a href="{% change_lang 'fr' %}" class="px-3 py-1 transition-colors {% if LANGUAGE_CODE == 'fr' %}bg-tse_text text-white{% else %}text-tse_muted hover:text-tse_text{% endif %}">FR</a>
                     </div>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'dashboard' %}" class="text-xs font-black uppercase tracking-widest border-b-2 border-tse_accent">{% trans "Mon Espace" %}</a>
+                        <a href="{% url 'dashboard' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap border-b-2 border-tse_accent">{% trans "Mon Espace" %}</a>
                         {% if user.is_superuser %}
-                        <a href="{% url 'admin_panel' %}" class="text-xs font-black uppercase tracking-widest text-purple-600 hover:text-purple-800 transition-colors" title="Admin Panel">🛠 Admin</a>
+                        <a href="{% url 'admin_panel' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap text-purple-600 hover:text-purple-800 transition-colors" title="Admin Panel">🛠 Admin</a>
                         {% endif %}
-                        <form method="post" action="{% url 'logout' %}" class="contents">{% csrf_token %}<button type="submit" class="text-xs font-bold text-gray-400 uppercase tracking-widest">{% trans "Déconnexion" %}</button></form>
+                        <form method="post" action="{% url 'logout' %}" class="contents">{% csrf_token %}<button type="submit" class="cursor-pointer whitespace-nowrap text-xs font-bold text-gray-400 uppercase tracking-widest">{% trans "Déconnexion" %}</button></form>
                     {% else %}
-                        <a href="{% url 'login' %}" class="text-xs font-black uppercase tracking-widest">{% trans "Connexion" %}</a>
+                        <a href="{% url 'login' %}" class="text-xs font-black uppercase xl:tracking-wide 2xl:tracking-widest whitespace-nowrap">{% trans "Connexion" %}</a>
                         <a href="{% url 'register' %}" class="btn-tse py-2 px-6 text-xs">{% trans "Rejoindre" %}</a>
                     {% endif %}
                 </div>
@@ -129,7 +152,7 @@
                     {% if user.is_superuser %}
                     <a href="{% url 'admin_panel' %}" class="block text-sm font-black uppercase tracking-widest text-purple-600">🛠 Admin Panel</a>
                     {% endif %}
-                    <form method="post" action="{% url 'logout' %}" class="contents">{% csrf_token %}<button type="submit" class="block text-sm font-bold text-gray-400 uppercase tracking-widest">{% trans "Déconnexion" %}</button></form>
+                    <form method="post" action="{% url 'logout' %}" class="contents">{% csrf_token %}<button type="submit" class="w-full block text-sm font-bold text-gray-400 uppercase tracking-widest">{% trans "Déconnexion" %}</button></form>
                 {% else %}
                     <a href="{% url 'login' %}" class="block text-sm font-black uppercase tracking-widest">{% trans "Connexion" %}</a>
                     <a href="{% url 'register' %}" class="btn-tse w-full py-4 text-center text-sm">{% trans "Rejoindre l'aventure" %}</a>
@@ -147,7 +170,7 @@
         </div>
     </nav>
     <!-- Main Content -->
-    <main class="flex-grow pt-16 relative">
+    <main class="flex-grow relative">
         <!-- Toast Notifications -->
         {% if messages %}
         <div id="toast-container" class="fixed top-24 right-4 z-50 space-y-4">

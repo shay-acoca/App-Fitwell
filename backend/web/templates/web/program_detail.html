@@ -56,7 +56,7 @@
                             <span>{% trans "Jour" %} {{ user_progress.current_day }} / {{ program.total_sessions }}</span>
                             <span class="font-black">{{ user_progress.progress_percentage }}%</span>
                         </div>
-                        <div class="bg-white/20 rounded-full h-2 mb-4">
+                        <div class="bg-slate-50/20 rounded-full h-2 mb-4">
                             <div class="bg-white rounded-full h-2" style="width: {{ user_progress.progress_percentage }}%"></div>
                         </div>
                         <a href="{% url 'program_detail' slug=program.slug %}" class="inline-block bg-white text-tse_accent px-6 py-2 rounded-tse-pill text-xs font-black uppercase tracking-widest">

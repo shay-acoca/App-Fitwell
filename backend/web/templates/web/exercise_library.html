@@ -154,7 +154,7 @@
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         
                         <div class="absolute top-4 left-4 z-10">
-                            <span class="px-3 py-1.5 bg-white/20 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-widest rounded-tse-pill border border-white/30">
+                            <span class="px-3 py-1.5 bg-slate-50/20 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-widest rounded-tse-pill border border-white/30">
                                 {{ exercise.get_difficulty_display }}
                             </span>
                         </div>
@@ -191,7 +191,7 @@
 
         {% if not user.is_authenticated %}
         <!-- CTA Inscription TSE -->
-        <div class="mt-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-tse-card p-12 text-center border border-gray-200 fade-in" style="animation-delay: 0.6s;">
+        <div class="mt-16 bg-gray-50 rounded-tse-card p-12 text-center border border-gray-200 fade-in" style="animation-delay: 0.6s;">
             <div class="inline-block p-4 bg-tse_accent/10 rounded-full mb-6">
                 <svg class="w-8 h-8 text-tse_accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
