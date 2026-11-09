@@ -37,7 +37,7 @@ cd backend
 python manage.py test
 ```
 
-52 automated tests cover the API and the main web flows. They also run on every push through GitHub Actions.
+58 automated tests cover the API and the main web flows. They also run on every push through GitHub Actions.
 
 ## Known limitations
 
