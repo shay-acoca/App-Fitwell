@@ -59,6 +59,8 @@ urlpatterns = [
     
     # Programmes
     path('programs/', views.program_list, name='program_list'),
+    path('programs/<int:program_id>/start/', views.start_program, name='start_program'),
+    path('programs/<int:program_id>/day/<int:day_number>/complete/', views.complete_program_day, name='complete_program_day'),
     path('programs/<slug:slug>/', views.program_detail, name='program_detail'),
     
     # Boutique
@@ -71,7 +73,7 @@ urlpatterns = [
     path('cart/remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/update/<int:item_id>/', views.update_cart_quantity, name='update_cart_quantity'),
     path('cart/checkout/', views.fake_checkout, name='fake_checkout'),
-    path('cart/order-success/', views.order_success, name='order_success'),
+    path('cart/order-success/<int:order_id>/', views.order_success, name='order_success'),
     path('favorites/', views.favorites_view, name='favorites'),
     path('favorites/add/<str:content_type>/<int:content_id>/', views.add_favorite, name='add_favorite'),
     path('favorites/remove/<int:favorite_id>/', views.remove_favorite, name='remove_favorite'),

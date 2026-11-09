@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
@@ -174,7 +175,7 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.order_number:
-            self.order_number = f"ORD-{self.user.id}-{self.created_at.strftime('%Y%m%d%H%M%S')}"
+            self.order_number = f"ORD-{self.user.id}-{timezone.now().strftime('%Y%m%d%H%M%S')}"
         super().save(*args, **kwargs)
 
 
