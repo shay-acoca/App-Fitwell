@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
@@ -39,10 +40,17 @@ def onboarding_step3(request):
         return redirect('dashboard')
     
     if request.method == 'POST':
-        age = int(request.POST.get('age'))
         gender = request.POST.get('gender')
-        height = int(request.POST.get('height'))
-        weight = float(request.POST.get('weight'))
+        try:
+            age = int(request.POST.get('age', ''))
+            height = int(request.POST.get('height', ''))
+            weight = float(request.POST.get('weight', ''))
+        except ValueError:
+            messages.error(request, _("Veuillez saisir un âge, une taille et un poids valides."))
+            return render(request, 'web/onboarding/step3_data.html')
+        if not (10 <= age <= 120 and 100 <= height <= 250 and 30 <= weight <= 400):
+            messages.error(request, _("Veuillez saisir un âge, une taille et un poids valides."))
+            return render(request, 'web/onboarding/step3_data.html')
         goal = request.session.get('onboarding_goal', 'maintenance')
         activity_level = request.session.get('onboarding_activity', 'moderate')
         

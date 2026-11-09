@@ -1,3 +1,4 @@
+from decimal import Decimal, InvalidOperation
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -19,10 +20,18 @@ def shop_list(request):
     
     if category_filter:
         products = products.filter(category=category_filter)
-    if min_price:
-        products = products.filter(price__gte=min_price)
-    if max_price:
-        products = products.filter(price__lte=max_price)
+    def parse_price(value):
+        try:
+            return Decimal(value) if value else None
+        except InvalidOperation:
+            return None
+
+    parsed_min_price = parse_price(min_price)
+    parsed_max_price = parse_price(max_price)
+    if parsed_min_price is not None:
+        products = products.filter(price__gte=parsed_min_price)
+    if parsed_max_price is not None:
+        products = products.filter(price__lte=parsed_max_price)
     if search:
         products = products.filter(
             Q(name__icontains=search) |
